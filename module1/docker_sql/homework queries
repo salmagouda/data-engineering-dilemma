@@ -1,0 +1,61 @@
+-- Question 3. Count records
+-- How many taxi trips were totally made on September 18th 2019?
+
+SELECT 
+COUNT(1) FROM green_taxi_data
+    WHERE
+	    CAST(lpep_pickup_datetime as date) = '2019-09-18'
+	    and 
+        CAST(lpep_dropoff_datetime as date) = '2019-09-18'
+
+--Question 4. Largest trip for each day
+--Which was the pick up day with the largest trip distance?
+
+SELECT 
+MAX(trip_distance) as maxD
+,lpep_pickup_datetime
+FROM green_taxi_data
+GROUP BY lpep_pickup_datetime
+ORDER BY maxD DESC
+
+--Question 5. Three biggest pick up Boroughs
+--Which were the 3 pick up Boroughs that had a sum of total_amount superior to 50000?
+
+SELECT 
+"Borough"
+,sum(total_amount) as total
+FROM green_taxi_data  g
+JOIN zones  z 
+	on g."PULocationID" = z."LocationID"
+WHERE CAST(lpep_pickup_datetime as date) = '2019-09-18'
+    and z."Borough" <> 'Unknown'
+GROUP BY "Borough"
+HAVING sum(total_amount) > 50000
+ORDER BY total DESC
+LIMIT 3;
+
+--Question 6. Largest tip
+--For the passengers picked up in September 2019 in the zone name Astoria which was the drop off zone that had the largest tip?
+
+SELECT 
+zpu."Zone"
+,zdo."Zone"
+,max(tip_amount) as tip
+FROM green_taxi_data  g
+JOIN zones zpu
+	on g."PULocationID" = zpu."LocationID"
+JOIN zones zdo
+	on g."DOLocationID" = zdo."LocationID"
+WHERE DATE_TRUNC('month', lpep_pickup_datetime) = '2019-09-01 00:00:00'
+    and zpu."Zone" = 'Astoria'
+GROUP BY zpu."Zone",zdo."Zone"
+ORDER BY tip DESC
+
+
+
+
+
+
+
+
+
