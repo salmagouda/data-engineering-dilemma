@@ -5,6 +5,8 @@
 **.terraform
 **.terraform.lock.*
 **google_credentials.json
+**my-creds.json
+*.json
 **logs/
 **.env
 **__pycache__/
