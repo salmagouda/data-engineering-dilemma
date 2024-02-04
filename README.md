@@ -5,4 +5,5 @@ This repo is to follow up, practice, and do homework for the Data Engineering Zo
 ## Course Modules:
 
 [Module 1: Containerization and Infrastructure as Code](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main?tab=readme-ov-file#module-1-containerization-and-infrastructure-as-code)
+
 [Module 2: Workflow Orchesterization](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/02-workflow-orchestration)
