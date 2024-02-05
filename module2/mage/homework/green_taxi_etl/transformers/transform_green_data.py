@@ -11,6 +11,8 @@ def camel_to_snake(name):
     """
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
 
+previous_vendor_ids = set([2., 1., np.nan])
+
 @transformer
 def transform(data, *args, **kwargs):
     # Remove rows where passenger_count or trip_distance is equal to 0
@@ -36,6 +38,18 @@ def transform(data, *args, **kwargs):
 
 @test
 def test_output(output, *args):
+    
+    global previous_vendor_ids  # Maintain the set across batches
+    current_vendor_ids = set(output['vendor_id'].unique())
+    # Check for new vendor_id values not present in previous batches
+    new_vendor_ids = current_vendor_ids - previous_vendor_ids
+    
+    assert output is not None, 'The output is undefined'
+
+    # Check if there are any new values and ensure they are not NaN
+    if new_vendor_ids and not any(np.isnan(value) for value in new_vendor_ids):
+        raise AssertionError(f"Some new vendor_id values {new_vendor_ids} were not present in previous batches.")
+        
     #Assert that passenger_count > 0
     assert output["passenger_count"].isin([0]).sum() == 0, 'There are rides with zero passengers'
     
