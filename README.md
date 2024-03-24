@@ -20,3 +20,5 @@ This repo is to follow up, practice, and do homework for the Data Engineering Zo
 [Module 5: Batch Processing](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/05-batch)
 
 [Workshop 2: Streaming with SQL](https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2024/workshops/rising-wave.md)
+
+[Module 6: Stream Processing](https://github.com/DataTalksClub/data-engineering-zoomcamp/tree/main/06-streaming)
